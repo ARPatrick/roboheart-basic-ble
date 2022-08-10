@@ -1,0 +1,4 @@
+rootProject.name = "BLE"
+include ':app'
+include ':joystickView'
+include ':BLE_experiments'

@@ -1,0 +1,2 @@
+com/example/ble/BuildConfig.java
+ com.example.ble.BuildConfig

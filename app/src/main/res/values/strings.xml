@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">BLE</string>
+    <string name="scan">scan</string>
+    <string name="read">read</string>
+    <string name="write_forward">write_forward</string>
+    <string name="forward">forward</string>
+    <string name="rights_lab">rights_lab</string>
+    <string name="angle_lab">angle_lab</string>
+    <string name="none">none</string>
+    <string name="power_lab">power_lab</string>
+    <string name="direction_lab">direction_lab</string>
+    <string name="front_lab">Front</string>
+    <string name="front_right_lab">Front-Right</string>
+    <string name="right_lab">Right</string>
+    <string name="right_bottom_lab">Right-Bottom</string>
+    <string name="bottom_lab">Bottom</string>
+    <string name="bottom_left_lab">Left-Bottom</string>
+    <string name="left_lab">Left</string>
+    <string name="left_front_lab">Front-Left</string>
+    <string name="center_lab">Center</string>
+    <string name="disconnect">disconnect</string>
+
+
+</resources>
