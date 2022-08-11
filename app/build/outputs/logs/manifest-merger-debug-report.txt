@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-27:12
+ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-31:12
 MERGED from [androidx.core:core-ktx:1.5.0] C:\Users\Nutzer\.gradle\caches\transforms-2\files-2.1\1cdee3686df3584b21e68f28e443d504\jetified-core-ktx-1.5.0\AndroidManifest.xml:2:1-9:12
 MERGED from [org.jetbrains.anko:anko:0.10.8] C:\Users\Nutzer\.gradle\caches\transforms-2\files-2.1\d0af84233d34b9da511b4cc676853d9e\jetified-anko-0.10.8\AndroidManifest.xml:2:1-13:12
 MERGED from [org.jetbrains.anko:anko-sqlite:0.10.8] C:\Users\Nutzer\.gradle\caches\transforms-2\files-2.1\8e1d969a1923d2de4af20cd56d5cd581\jetified-anko-sqlite-0.10.8\AndroidManifest.xml:2:1-13:12
@@ -67,20 +67,20 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Nutzer\.gradle\c
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Nutzer\.gradle\caches\transforms-2\files-2.1\157f346dbae45c93d7e89c8dc0f64d11\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\Nutzer\.gradle\caches\transforms-2\files-2.1\c75baccc9ba3d0a965ca6f2d527517f6\print-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\Nutzer\.gradle\caches\transforms-2\files-2.1\3c6125ff6e968707e1dc271b928c57f9\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:17:1-24:12
-INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-27:12
+INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-31:12
 	package
-		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:3:5-30
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:3:5-40
 		INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-27:12
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-31:12
 		INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-27:12
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:1-31:12
 		INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:2:11-69
@@ -100,8 +100,12 @@ uses-permission#android.permission.ACCESS_COARSE_LOCATION
 ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:7:5-80
 	android:name
 		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:7:22-78
+uses-permission#android.permission.BLUETOOTH_CONNECT
+ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:9:5-76
+	android:name
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:9:22-73
 application
-ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:9:5-25:19
+ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:11:5-29:19
 MERGED from [org.jetbrains.anko:anko:0.10.8] C:\Users\Nutzer\.gradle\caches\transforms-2\files-2.1\d0af84233d34b9da511b4cc676853d9e\jetified-anko-0.10.8\AndroidManifest.xml:11:5-20
 MERGED from [org.jetbrains.anko:anko:0.10.8] C:\Users\Nutzer\.gradle\caches\transforms-2\files-2.1\d0af84233d34b9da511b4cc676853d9e\jetified-anko-0.10.8\AndroidManifest.xml:11:5-20
 MERGED from [org.jetbrains.anko:anko-sqlite:0.10.8] C:\Users\Nutzer\.gradle\caches\transforms-2\files-2.1\8e1d969a1923d2de4af20cd56d5cd581\jetified-anko-sqlite-0.10.8\AndroidManifest.xml:11:5-20
@@ -139,39 +143,41 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Nu
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.5.0] C:\Users\Nutzer\.gradle\caches\transforms-2\files-2.1\a293880573814c8eab1e4111924bb34d\core-1.5.0\AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:14:9-35
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:17:9-35
 	android:label
-		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:12:9-41
-	android:roundIcon
-		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:13:9-54
-	android:icon
-		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:11:9-43
-	android:allowBackup
-		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:10:9-35
-	android:theme
 		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:15:9-41
-activity#com.example.ble.MainActivity
-ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:16:9-22:20
+	android:roundIcon
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:16:9-54
+	android:icon
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:14:9-43
+	android:allowBackup
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:13:9-35
+	android:theme
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:18:9-41
+activity#com.augmentedrobotics.ble.MainActivity
+ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:19:9-26:20
 	android:screenOrientation
-		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:17:13-49
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:21:13-49
+	android:exported
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:20:13-36
 	android:name
-		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:16:19-47
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:19:19-72
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:18:13-21:29
+ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:22:13-25:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:19:17-69
+ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:23:17-69
 	android:name
-		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:19:25-66
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:23:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:20:17-77
+ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:24:17-77
 	android:name
-		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:20:27-74
-activity#com.example.ble.ControlActivity
-ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:23:9-24:52
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:24:27-74
+activity#com.augmentedrobotics.ble.ControlActivity
+ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:27:9-28:52
 	android:screenOrientation
-		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:24:13-50
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:28:13-50
 	android:name
-		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:23:19-50
+		ADDED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:27:19-75
 uses-sdk
 INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml

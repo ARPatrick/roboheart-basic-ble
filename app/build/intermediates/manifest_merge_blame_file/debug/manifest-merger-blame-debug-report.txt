@@ -1,13 +1,13 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.example.ble"
+3    package="com.augmentedrobotics.ble"
 4    android:versionCode="1"
 5    android:versionName="1.0" >
 6
 7    <uses-sdk
 8        android:minSdkVersion="26"
 8-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml
-9        android:targetSdkVersion="30" />
+9        android:targetSdkVersion="31" />
 9-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -22,48 +22,54 @@
 14    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 14-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:7:5-80
 14-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:7:22-78
-15
-16    <application
-16-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:9:5-25:19
-17        android:allowBackup="true"
-17-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:10:9-35
-18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-18-->[androidx.core:core:1.5.0] C:\Users\Nutzer\.gradle\caches\transforms-2\files-2.1\a293880573814c8eab1e4111924bb34d\core-1.5.0\AndroidManifest.xml:24:18-86
-19        android:debuggable="true"
-20        android:extractNativeLibs="false"
-21        android:icon="@mipmap/ic_launcher"
-21-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:11:9-43
-22        android:label="@string/app_name"
-22-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:12:9-41
-23        android:roundIcon="@mipmap/ic_launcher_round"
-23-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:13:9-54
-24        android:supportsRtl="true"
-24-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:14:9-35
-25        android:theme="@style/Theme.BLE" >
-25-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:15:9-41
-26        <activity
-26-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:16:9-22:20
-27            android:name="com.example.ble.MainActivity"
-27-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:16:19-47
-28            android:screenOrientation="portrait" >
-28-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:17:13-49
-29            <intent-filter>
-29-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:18:13-21:29
-30                <action android:name="android.intent.action.MAIN" />
-30-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:19:17-69
-30-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:19:25-66
-31
-32                <category android:name="android.intent.category.LAUNCHER" />
-32-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:20:17-77
-32-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:20:27-74
-33            </intent-filter>
-34        </activity>
-35        <activity
-35-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:23:9-24:52
-36            android:name="com.example.ble.ControlActivity"
-36-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:23:19-50
-37            android:screenOrientation="landscape" />
-37-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:24:13-50
-38    </application>
-39
-40</manifest>
+15    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+15-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:9:5-76
+15-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:9:22-73
+16
+17    <application
+17-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:11:5-29:19
+18        android:allowBackup="true"
+18-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:13:9-35
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.5.0] C:\Users\Nutzer\.gradle\caches\transforms-2\files-2.1\a293880573814c8eab1e4111924bb34d\core-1.5.0\AndroidManifest.xml:24:18-86
+20        android:debuggable="true"
+21        android:extractNativeLibs="false"
+22        android:icon="@mipmap/ic_launcher"
+22-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:14:9-43
+23        android:label="@string/app_name"
+23-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:15:9-41
+24        android:roundIcon="@mipmap/ic_launcher_round"
+24-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:16:9-54
+25        android:supportsRtl="true"
+25-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:17:9-35
+26        android:testOnly="true"
+27        android:theme="@style/Theme.BLE" >
+27-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:18:9-41
+28        <activity
+28-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:19:9-26:20
+29            android:name="com.augmentedrobotics.ble.MainActivity"
+29-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:19:19-72
+30            android:exported="true"
+30-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:20:13-36
+31            android:screenOrientation="portrait" >
+31-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:21:13-49
+32            <intent-filter>
+32-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:22:13-25:29
+33                <action android:name="android.intent.action.MAIN" />
+33-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:23:17-69
+33-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:23:25-66
+34
+35                <category android:name="android.intent.category.LAUNCHER" />
+35-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:24:17-77
+35-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:24:27-74
+36            </intent-filter>
+37        </activity>
+38        <activity
+38-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:27:9-28:52
+39            android:name="com.augmentedrobotics.ble.ControlActivity"
+39-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:27:19-75
+40            android:screenOrientation="landscape" />
+40-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:28:13-50
+41    </application>
+42
+43</manifest>

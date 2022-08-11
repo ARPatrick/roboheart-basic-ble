@@ -1,9 +1,9 @@
-#Wed Aug 10 13:04:00 CEST 2022
-path.3=7/classes.dex
+#Thu Aug 11 12:07:41 CEST 2022
+path.3=10/classes.dex
 path.2=0/classes.dex
 path.1=7/classes.dex
 path.0=classes.dex
-base.3=C\:\\Users\\Nutzer\\Desktop\\BLE\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
+base.3=C\:\\Users\\Nutzer\\Desktop\\BLE\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
 base.2=C\:\\Users\\Nutzer\\Desktop\\BLE\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.1=C\:\\Users\\Nutzer\\Desktop\\BLE\\app\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\7\\classes.dex
 base.0=C\:\\Users\\Nutzer\\Desktop\\BLE\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
