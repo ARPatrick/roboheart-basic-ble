@@ -69,8 +69,8 @@ class MainActivity : AppCompatActivity() {
 
     }
     override fun onCreate(savedInstanceState: Bundle?) {
-        if(BluetoothAdapter.getDefaultAdapter()!=null){return}
         super.onCreate(savedInstanceState)
+        if(BluetoothAdapter.getDefaultAdapter()!=null){this.finish()}
         setContentView(R.layout.activity_main)
         scan_button = findViewById<Button>(R.id.scan_button)
         scan_button.setOnClickListener{
@@ -91,9 +91,10 @@ class MainActivity : AppCompatActivity() {
         bluetoothAdapter.bluetoothLeScanner
     }
     //our bluetooth adapter and manager
+
     private val bluetoothAdapter: BluetoothAdapter by lazy {
         val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
-        bluetoothManager.adapter
+            bluetoothManager.adapter
     }
 
     private val scanResults = mutableListOf<ScanResult>()
@@ -219,12 +220,13 @@ class MainActivity : AppCompatActivity() {
 
     //check if bluetooth+GPS is enabled
     override fun onResume() {
-
+        super.onResume()
         if(BluetoothAdapter.getDefaultAdapter()!=null){
-            super.onResume()
             if (!bluetoothAdapter.isEnabled) {
                 promptEnableBluetooth()
             }
+        }else{
+            this.finish();
         }
 
 
