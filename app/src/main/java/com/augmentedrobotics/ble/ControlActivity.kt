@@ -14,11 +14,13 @@ import com.zerokol.views.joystickView.JoystickView
 import com.zerokol.views.joystickView.JoystickViewHorizontal
 import org.jetbrains.anko.toast
 import java.util.*
+import kotlin.concurrent.fixedRateTimer
 
 
 class ControlActivity: AppCompatActivity() {
     val serviceUuid = UUID.fromString("000000ff-0000-1000-8000-00805f9b34fb") //UUID of the service
-    val serviceCharUuid = UUID.fromString("0000ff01-0000-1000-8000-00805f9b34fb") //UUID of the characteristics
+    val serviceCharUuid = UUID.fromString("0000ff01-0000-1000-8000-00805f9b34fb") //UUID of the command characteristics
+    val serviceBatteryCharUuid = UUID.fromString("0000ff03-0000-1000-8000-00805f9b34fb")
     var characteristic: BluetoothGattCharacteristic?= null
 
 
@@ -129,11 +131,15 @@ class ControlActivity: AppCompatActivity() {
             updateCommand()
 
         }, JoystickView.DEFAULT_LOOP_INTERVAL)
-
-
+        fixedRateTimer("RoboHeartBatteryState",true,0,60*1000) {
+            readService()
+        }
     }
 
-     fun updateCommand(){
+
+
+
+    fun updateCommand(){
         //our characteristic that is to be written
         characteristic=bluetoothGatt.getService(serviceUuid)!!.getCharacteristic(serviceCharUuid)!!
 
@@ -189,7 +195,7 @@ class ControlActivity: AppCompatActivity() {
     private fun readService() {
 
         val batteryLevelChar = bluetoothGatt!!
-            .getService(serviceUuid)?.getCharacteristic(serviceCharUuid)
+            .getService(serviceUuid)?.getCharacteristic(serviceBatteryCharUuid)
         if (batteryLevelChar?.isReadable() == true) {
             if (ActivityCompat.checkSelfPermission(
                     this,

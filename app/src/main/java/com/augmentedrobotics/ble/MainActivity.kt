@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
 
     }
     override fun onCreate(savedInstanceState: Bundle?) {
+        if(BluetoothAdapter.getDefaultAdapter()!=null){return}
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         scan_button = findViewById<Button>(R.id.scan_button)
@@ -218,10 +219,14 @@ class MainActivity : AppCompatActivity() {
 
     //check if bluetooth+GPS is enabled
     override fun onResume() {
-        super.onResume()
-        if (!bluetoothAdapter.isEnabled) {
-            promptEnableBluetooth()
+
+        if(BluetoothAdapter.getDefaultAdapter()!=null){
+            super.onResume()
+            if (!bluetoothAdapter.isEnabled) {
+                promptEnableBluetooth()
+            }
         }
+
 
     }
     private fun promptEnableBluetooth() {
@@ -240,7 +245,7 @@ class MainActivity : AppCompatActivity() {
             if (result.resultCode == Activity.RESULT_OK) {
                 // There are no request codes
                 val data: Intent? = result.data
-                if (bluetoothAdapter!!.isEnabled) {
+                if (bluetoothAdapter.isEnabled) {
                     toast("Bluetooth/GPS has been enabled")
                 }
             } else {
@@ -291,6 +296,9 @@ class MainActivity : AppCompatActivity() {
 
     //scan buttin onItemClickListener
     fun startBleScan() {
+        if (bleScanner==null){
+            return;
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !isLocationPermissionGranted) {
             requestLocationPermission()
         }

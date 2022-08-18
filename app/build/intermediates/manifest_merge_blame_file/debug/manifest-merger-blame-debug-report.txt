@@ -1,75 +1,89 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="com.augmentedrobotics.ble"
-4    android:versionCode="1"
-5    android:versionName="1.0" >
+4    android:versionCode="5"
+5    android:versionName="1.0.5" >
 6
 7    <uses-sdk
-8        android:minSdkVersion="26"
+8        android:minSdkVersion="28"
 8-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="31" />
 9-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml
 10
-11    <uses-permission android:name="android.permission.BLUETOOTH" />
-11-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:4:5-68
-11-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:4:22-65
-12    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-12-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:5:5-74
-12-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:5:22-71
-13    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-13-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:6:5-79
-13-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:6:22-76
-14    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-14-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:7:5-80
-14-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:7:22-78
-15    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-15-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:9:5-76
-15-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:9:22-73
-16
-17    <application
-17-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:11:5-29:19
-18        android:allowBackup="true"
-18-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:13:9-35
-19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-19-->[androidx.core:core:1.5.0] C:\Users\Nutzer\.gradle\caches\transforms-2\files-2.1\a293880573814c8eab1e4111924bb34d\core-1.5.0\AndroidManifest.xml:24:18-86
-20        android:debuggable="true"
-21        android:extractNativeLibs="false"
-22        android:icon="@mipmap/ic_launcher"
-22-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:14:9-43
-23        android:label="@string/app_name"
-23-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:15:9-41
-24        android:roundIcon="@mipmap/ic_launcher_round"
-24-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:16:9-54
-25        android:supportsRtl="true"
-25-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:17:9-35
-26        android:testOnly="true"
-27        android:theme="@style/Theme.BLE" >
-27-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:18:9-41
-28        <activity
-28-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:19:9-26:20
-29            android:name="com.augmentedrobotics.ble.MainActivity"
-29-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:19:19-72
-30            android:exported="true"
-30-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:20:13-36
-31            android:screenOrientation="portrait" >
-31-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:21:13-49
-32            <intent-filter>
-32-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:22:13-25:29
-33                <action android:name="android.intent.action.MAIN" />
-33-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:23:17-69
-33-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:23:25-66
-34
-35                <category android:name="android.intent.category.LAUNCHER" />
-35-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:24:17-77
-35-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:24:27-74
-36            </intent-filter>
-37        </activity>
-38        <activity
-38-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:27:9-28:52
-39            android:name="com.augmentedrobotics.ble.ControlActivity"
-39-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:27:19-75
-40            android:screenOrientation="landscape" />
-40-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:28:13-50
-41    </application>
+11    <uses-permission
+11-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:4:5-118
+12        android:name="android.permission.BLUETOOTH"
+12-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:4:22-65
+13        android:maxSdkVersion="30"
+13-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:4:90-116
+14        android:required="true" />
+14-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:4:66-89
+15    <uses-permission
+15-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:5:5-101
+16        android:name="android.permission.BLUETOOTH_ADMIN"
+16-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:5:22-71
+17        android:maxSdkVersion="30" />
+17-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:5:72-98
+18    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+18-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:6:5-79
+18-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:6:22-76
+19    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+19-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:7:5-80
+19-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:7:22-78
+20    <uses-permission
+20-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:9:5-100
+21        android:name="android.permission.BLUETOOTH_CONNECT"
+21-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:9:22-73
+22        android:required="true" />
+22-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:9:74-97
+23    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+23-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:11:5-73
+23-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:11:22-70
+24
+25    <application
+25-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:13:5-31:19
+26        android:allowBackup="true"
+26-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:15:9-35
+27        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+27-->[androidx.core:core:1.5.0] C:\Users\Nutzer\.gradle\caches\transforms-2\files-2.1\a293880573814c8eab1e4111924bb34d\core-1.5.0\AndroidManifest.xml:24:18-86
+28        android:debuggable="true"
+29        android:extractNativeLibs="false"
+30        android:icon="@mipmap/ic_launcher"
+30-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:16:9-43
+31        android:label="@string/app_name"
+31-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:17:9-41
+32        android:roundIcon="@mipmap/ic_launcher_round"
+32-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:18:9-54
+33        android:supportsRtl="true"
+33-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:19:9-35
+34        android:testOnly="true"
+35        android:theme="@style/Theme.BLE" >
+35-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:20:9-41
+36        <activity
+36-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:21:9-28:20
+37            android:name="com.augmentedrobotics.ble.MainActivity"
+37-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:21:19-72
+38            android:exported="true"
+38-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:22:13-36
+39            android:screenOrientation="portrait" >
+39-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:23:13-49
+40            <intent-filter>
+40-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:24:13-27:29
+41                <action android:name="android.intent.action.MAIN" />
+41-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:25:17-69
+41-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:25:25-66
 42
-43</manifest>
+43                <category android:name="android.intent.category.LAUNCHER" />
+43-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:26:17-77
+43-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:26:27-74
+44            </intent-filter>
+45        </activity>
+46        <activity
+46-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:29:9-30:52
+47            android:name="com.augmentedrobotics.ble.ControlActivity"
+47-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:29:19-75
+48            android:screenOrientation="landscape" />
+48-->C:\Users\Nutzer\Desktop\BLE\app\src\main\AndroidManifest.xml:30:13-50
+49    </application>
+50
+51</manifest>
