@@ -35,13 +35,15 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private val LOCATION_PERMISSION_REQUEST_CODE = 2
+    private val BLUETOOTH_SCAN_PERMISSION_REQUEST_CODE= 3;
+    private val BLUETOOTH_CONNECT_PERMISSION_REQUEST_CODE= 4;
     lateinit var scan_button : Button
 
     lateinit var scan_results_recycler_view: RecyclerView
     lateinit var bluetoothGatt : BluetoothGatt
     val serviceUuid = UUID.fromString("000000ff-0000-1000-8000-00805f9b34fb") //UUID of the service
-    val serviceCharUuid = UUID.fromString("0000ff01-0000-1000-8000-00805f9b34fb") //UUID of the characteristics
-
+    val serviceCharUuid = UUID.fromString("0000ff03-0000-1000-8000-00805f9b34fb") //UUID of the characteristics
+    lateinit var controller:ControlActivity
 
     companion object {
         lateinit var bluetoothGatt_copy: BluetoothGatt
@@ -70,7 +72,7 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(BluetoothAdapter.getDefaultAdapter()!=null){this.finish()}
+        if(BluetoothAdapter.getDefaultAdapter()==null){this.finish()}
         setContentView(R.layout.activity_main)
         scan_button = findViewById<Button>(R.id.scan_button)
         scan_button.setOnClickListener{
@@ -106,10 +108,13 @@ class MainActivity : AppCompatActivity() {
                 stopBleScan()
             }
             with(result.device) {
-                Log.w("ScanResultAdapter", "Connecting to $address")
                 if (ActivityCompat.checkSelfPermission(
                         this@MainActivity,
                         Manifest.permission.BLUETOOTH_CONNECT
+                    ) != PackageManager.PERMISSION_GRANTED
+                    ||ActivityCompat.checkSelfPermission(
+                        this@MainActivity,
+                        Manifest.permission.BLUETOOTH
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
                     connectGatt(this@MainActivity, false, gattCallback)
@@ -129,16 +134,18 @@ class MainActivity : AppCompatActivity() {
     private val gattCallback = object : BluetoothGattCallback() {
         override fun onConnectionStateChange(gatt: BluetoothGatt, status: Int, newState: Int) {
             val deviceAddress = gatt.device.address
-
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 if (newState == BluetoothProfile.STATE_CONNECTED) {
-                    Log.w("BluetoothGattCallback", "Successfully connected to $deviceAddress")
                     //toast("connected")
                     bluetoothGatt = gatt
                     Handler(Looper.getMainLooper()).post {
                         if (ActivityCompat.checkSelfPermission(
                                 this@MainActivity,
                                 Manifest.permission.BLUETOOTH_CONNECT
+                            ) != PackageManager.PERMISSION_GRANTED
+                            || ActivityCompat.checkSelfPermission(
+                                this@MainActivity,
+                                Manifest.permission.BLUETOOTH
                             ) != PackageManager.PERMISSION_GRANTED
                         ) {
                             bluetoothGatt?.discoverServices()
@@ -150,20 +157,17 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this@MainActivity, ControlActivity::class.java)
                     bluetoothGatt_copy=bluetoothGatt
                     startActivity(intent)
-                    toast("connecting...")
+                    //toast("connecting...")
                 } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
-                    Log.w("BluetoothGattCallback", "Successfully disconnected from $deviceAddress")
                     gatt.close()
                 }
             } else {
-                Log.w("BluetoothGattCallback", "Error $status encountered for $deviceAddress! Disconnecting...")
                 gatt.close()
             }
         }
 
         override fun onServicesDiscovered(gatt: BluetoothGatt, status: Int) {
             with(gatt) {
-                Log.w("BluetoothGattCallback", "Discovered ${services.size} services for ${device.address}")
                 printGattTable()
                 // Consider connection setup as complete here
             }
@@ -181,7 +185,7 @@ class MainActivity : AppCompatActivity() {
             with(characteristic) {
                 when (status) {
                     BluetoothGatt.GATT_SUCCESS -> {
-                        Log.i("BluetoothGattCallback", "Read characteristic $uuid:\n${value.toHexString()}")
+                        Log.i("BluetoothGattCallback", "Battery Percentage: ${littleEndianConversion(value)}%")
                     }
                     BluetoothGatt.GATT_READ_NOT_PERMITTED -> {
                         Log.e("BluetoothGattCallback", "Read not permitted for $uuid!")
@@ -289,11 +293,23 @@ class MainActivity : AppCompatActivity() {
     val isLocationPermissionGranted
         get() = hasPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)
 
+    val isBLEScanPermissionGranted
+        get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            hasPermission(android.Manifest.permission.BLUETOOTH_SCAN)
+        } else {
+            hasPermission(android.Manifest.permission.BLUETOOTH_ADMIN)
+        }
+
     fun Context.hasPermission(permissionType: String): Boolean {
         return ContextCompat.checkSelfPermission(this, permissionType) ==
                 PackageManager.PERMISSION_GRANTED
     }
-
+    val isBluetoothConnectPermissionGranted
+        get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            hasPermission(android.Manifest.permission.BLUETOOTH_CONNECT)
+        } else {
+            hasPermission(android.Manifest.permission.BLUETOOTH)
+        }
 
 
     //scan buttin onItemClickListener
@@ -305,7 +321,6 @@ class MainActivity : AppCompatActivity() {
             requestLocationPermission()
         }
         else {
-
             scanResults.clear()
             scanResultAdapter.notifyDataSetChanged()
             if (ActivityCompat.checkSelfPermission(
@@ -313,6 +328,7 @@ class MainActivity : AppCompatActivity() {
                     Manifest.permission.BLUETOOTH_SCAN
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
+                requestBLEScanPermission()
                 return
             }
             bleScanner.startScan(mutableListOf(scanFilter), scanSettings, scanCallback)
@@ -346,6 +362,7 @@ class MainActivity : AppCompatActivity() {
 
     private val scanCallback = object : ScanCallback() {
         override fun onScanResult(callbackType: Int, result: ScanResult) {
+
             val indexQuery = scanResults.indexOfFirst { it.device.address == result.device.address }
             if (indexQuery != -1) { // A scan result already exists with the same address
                 scanResults[indexQuery] = result
@@ -357,13 +374,7 @@ class MainActivity : AppCompatActivity() {
                             Manifest.permission.BLUETOOTH_CONNECT
                         ) != PackageManager.PERMISSION_GRANTED
                     ) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
+                        requestBluetoothConnectPermissions();
                         return
                     }
                     Log.i("ScanCallback", "Found BLE device! Name: ${name ?: "Unnamed"}, address: $address")
@@ -402,13 +413,8 @@ class MainActivity : AppCompatActivity() {
                     Manifest.permission.BLUETOOTH_CONNECT
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
+
+                Log.e("RoboHeartBLE", "i donÄt have the permission to connect anymore")
                 return
             }
             gatt.writeCharacteristic(characteristic)
@@ -435,6 +441,63 @@ class MainActivity : AppCompatActivity() {
                         android.Manifest.permission.ACCESS_FINE_LOCATION,
                         LOCATION_PERMISSION_REQUEST_CODE
                     )
+                }
+            }.show()
+        }
+    }
+
+    private fun requestBLEScanPermission() {
+        if (isBLEScanPermissionGranted) {
+            return
+        }
+        runOnUiThread {
+            alert {
+                title = "BLE Scan permissions required"
+                message = "This app provides functionality with the RoboHeart via BLE" +
+                        " it needs the permission to scan for bluetooth devices to connect with the RoboHeart"
+                isCancelable = false
+                positiveButton(android.R.string.ok) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        requestPermission(
+                            android.Manifest.permission.BLUETOOTH_SCAN,
+                            BLUETOOTH_SCAN_PERMISSION_REQUEST_CODE
+                        )
+                    }else{
+                        requestPermission(
+                            android.Manifest.permission.BLUETOOTH_ADMIN,
+                            BLUETOOTH_SCAN_PERMISSION_REQUEST_CODE
+                        )
+                    }
+
+                }
+            }.show()
+        }
+    }
+    private var currentlyRequestingBluetooth: Boolean = false
+    private fun requestBluetoothConnectPermissions() {
+        if (isBluetoothConnectPermissionGranted||!currentlyRequestingBluetooth) {
+            return
+        }
+        currentlyRequestingBluetooth= true
+        runOnUiThread {
+            alert {
+                title = "Permission to connect to known bluetooth devices"
+                message = "After scanning and finding! a RoboHeart the app also needs the permission" +
+                        "to actually connect to bluetooth devices"
+                isCancelable = false
+                positiveButton(android.R.string.ok) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        requestPermission(
+                            android.Manifest.permission.BLUETOOTH_CONNECT,
+                            BLUETOOTH_CONNECT_PERMISSION_REQUEST_CODE
+                        )
+                    }else{
+                        requestPermission(
+                            android.Manifest.permission.BLUETOOTH,
+                            BLUETOOTH_CONNECT_PERMISSION_REQUEST_CODE
+                        )
+                    }
+
                 }
             }.show()
         }
@@ -477,9 +540,29 @@ class MainActivity : AppCompatActivity() {
                     startBleScan()
                 }
             }
+            BLUETOOTH_SCAN_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.firstOrNull() == PackageManager.PERMISSION_DENIED) {
+                    requestBLEScanPermission()
+                } else {
+                    startBleScan()
+                }
+            }
+            BLUETOOTH_CONNECT_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.firstOrNull() == PackageManager.PERMISSION_DENIED) {
+                    requestBluetoothConnectPermissions()
+                } else {
+                    currentlyRequestingBluetooth = false
+                }
+            }
         }
     }
-
+    fun littleEndianConversion(bytes: ByteArray): Int {
+        var result = 0
+        for (i in bytes.indices) {
+            result = result or (bytes[i].toInt() shl 8 * i)
+        }
+        return result
+    }
 
 
 }

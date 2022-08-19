@@ -3,10 +3,14 @@ package com.augmentedrobotics.ble
 import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothGatt
+import android.bluetooth.BluetoothGattCallback
 import android.bluetooth.BluetoothGattCharacteristic
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -49,7 +53,6 @@ class ControlActivity: AppCompatActivity() {
         setContentView(R.layout.layout_landscape)
 
         bluetoothGatt=MainActivity.bluetoothGatt_copy!!
-
 
         //disconnect button
         disconnect_button = findViewById(R.id.cancel_button)
@@ -131,13 +134,36 @@ class ControlActivity: AppCompatActivity() {
             updateCommand()
 
         }, JoystickView.DEFAULT_LOOP_INTERVAL)
-        fixedRateTimer("RoboHeartBatteryState",true,0,60*1000) {
+        Log.i("RoboHeartBLE","starting fixedRateTimer")
+        fixedRateTimer("RoboHeartBatteryState",true,0,5000) {
             readService()
         }
     }
 
+    private val gattCallback = object : BluetoothGattCallback() {
+        override fun onCharacteristicRead(
+            gatt: BluetoothGatt,
+            characteristic: BluetoothGattCharacteristic,
+            status: Int
+        ) {
+            with(characteristic) {
+                when (status) {
+                    BluetoothGatt.GATT_SUCCESS -> {
+                        Log.i("RoboHeartBLE","Battery: "+value.toHexString())
+                    }
+                    BluetoothGatt.GATT_READ_NOT_PERMITTED -> {
+                        Log.e("BluetoothGattCallback", "Read not permitted for $uuid!")
+                    }
+                    else -> {
+                        Log.e("BluetoothGattCallback", "Characteristic read failed for $uuid, error: $status")
+                    }
+                }
+            }
+        }
+    }
 
-
+    fun ByteArray.toHexString(): String =
+        joinToString(separator = " ", prefix = "0x") { String.format("%02X", it) }
 
     fun updateCommand(){
         //our characteristic that is to be written
@@ -193,13 +219,16 @@ class ControlActivity: AppCompatActivity() {
 
 
     private fun readService() {
-
         val batteryLevelChar = bluetoothGatt!!
             .getService(serviceUuid)?.getCharacteristic(serviceBatteryCharUuid)
         if (batteryLevelChar?.isReadable() == true) {
             if (ActivityCompat.checkSelfPermission(
                     this,
                     Manifest.permission.BLUETOOTH_CONNECT
+                ) != PackageManager.PERMISSION_GRANTED
+                ||ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.BLUETOOTH
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 bluetoothGatt!!.readCharacteristic(batteryLevelChar)
@@ -246,7 +275,6 @@ class ControlActivity: AppCompatActivity() {
     fun BluetoothGattCharacteristic.containsProperty(property: Int): Boolean {
         return properties and property != 0
     }
-
 
     /*
     joystick.setOnJoystickMoveListener({ angle, power, direction ->
@@ -396,6 +424,9 @@ class ControlActivity: AppCompatActivity() {
             m_progress.dismiss()
         }
     }*/
+    public fun handleBatteryUpdate(batteryPercentage:Int){
+
+    }
 }
 
 
