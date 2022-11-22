@@ -297,7 +297,7 @@ class MainActivity : AppCompatActivity() {
         get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             hasPermission(android.Manifest.permission.BLUETOOTH_SCAN)
         } else {
-            hasPermission(android.Manifest.permission.BLUETOOTH_ADMIN)
+            hasPermission(android.Manifest.permission.BLUETOOTH)
         }
 
     fun Context.hasPermission(permissionType: String): Boolean {
@@ -323,11 +323,7 @@ class MainActivity : AppCompatActivity() {
         else {
             scanResults.clear()
             scanResultAdapter.notifyDataSetChanged()
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.BLUETOOTH_SCAN
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
+            if (!isBLEScanPermissionGranted) {
                 requestBLEScanPermission()
                 return
             }
@@ -341,6 +337,10 @@ class MainActivity : AppCompatActivity() {
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BLUETOOTH_SCAN
+            ) != PackageManager.PERMISSION_GRANTED
+            &&ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.BLUETOOTH
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             return
@@ -369,11 +369,7 @@ class MainActivity : AppCompatActivity() {
                 scanResultAdapter.notifyItemChanged(indexQuery)
             } else {
                 with(result.device) {
-                    if (ActivityCompat.checkSelfPermission(
-                            this@MainActivity,
-                            Manifest.permission.BLUETOOTH_CONNECT
-                        ) != PackageManager.PERMISSION_GRANTED
-                    ) {
+                    if (!isBluetoothConnectPermissionGranted) {
                         requestBluetoothConnectPermissions();
                         return
                     }
@@ -381,6 +377,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 scanResults.add(result)
                 scanResultAdapter.notifyItemInserted(scanResults.size - 1)
+                scanResultAdapter.notifyDataSetChanged()
+
+
+                return
             }
         }
 
@@ -412,9 +412,13 @@ class MainActivity : AppCompatActivity() {
                     this,
                     Manifest.permission.BLUETOOTH_CONNECT
                 ) != PackageManager.PERMISSION_GRANTED
+                ||ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.BLUETOOTH
+                ) != PackageManager.PERMISSION_GRANTED
             ) {
 
-                Log.e("RoboHeartBLE", "i donÄt have the permission to connect anymore")
+                Log.e("RoboHeartBLE", "i don't have the permission to connect anymore")
                 return
             }
             gatt.writeCharacteristic(characteristic)
@@ -464,7 +468,7 @@ class MainActivity : AppCompatActivity() {
                         )
                     }else{
                         requestPermission(
-                            android.Manifest.permission.BLUETOOTH_ADMIN,
+                            android.Manifest.permission.BLUETOOTH,
                             BLUETOOTH_SCAN_PERMISSION_REQUEST_CODE
                         )
                     }
@@ -475,7 +479,7 @@ class MainActivity : AppCompatActivity() {
     }
     private var currentlyRequestingBluetooth: Boolean = false
     private fun requestBluetoothConnectPermissions() {
-        if (isBluetoothConnectPermissionGranted||!currentlyRequestingBluetooth) {
+        if (isBluetoothConnectPermissionGranted||currentlyRequestingBluetooth) {
             return
         }
         currentlyRequestingBluetooth= true

@@ -47,7 +47,7 @@ class ControlActivity: AppCompatActivity() {
 
 
 
-    @SuppressLint("LogNotTimber")
+    @SuppressLint("LogNotTimber", "MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_landscape)
@@ -57,14 +57,7 @@ class ControlActivity: AppCompatActivity() {
         //disconnect button
         disconnect_button = findViewById(R.id.cancel_button)
         disconnect_button.setOnClickListener{
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.BLUETOOTH_CONNECT
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                bluetoothGatt.disconnect();
-            }
-
+            bluetoothGatt.disconnect();
             toast("disconnecting...")
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -237,6 +230,7 @@ class ControlActivity: AppCompatActivity() {
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun writeCharacteristic(characteristic: BluetoothGattCharacteristic, payload: ByteArray) {
         val writeType = when {
             characteristic.isWritable() -> BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
@@ -249,13 +243,8 @@ class ControlActivity: AppCompatActivity() {
         bluetoothGatt?.let { gatt ->
             characteristic.writeType = writeType
             characteristic.value = payload
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.BLUETOOTH_CONNECT
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                gatt.writeCharacteristic(characteristic)
-            }
+            gatt.writeCharacteristic(characteristic)
+
 
         } ?: error("Not connected to a BLE device!")
     }
